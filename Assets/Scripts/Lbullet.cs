@@ -45,4 +45,11 @@ public class Lbullet : MonoBehaviour
         pos = this.gameObject.transform.position;
         Instantiate(spark, pos , transform.rotation);
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.tag == "Monster") {
+            
+        }
+        
+    }
 }

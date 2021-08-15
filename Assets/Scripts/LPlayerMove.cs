@@ -8,6 +8,7 @@ public class LPlayerMove : MonoBehaviour
     public float maxSpeed;
     public float counterJumpPower;
     public float jumpPower;
+    public float isRight;
     public Transform frontCheck;
 
     Rigidbody2D rigid;
@@ -15,7 +16,7 @@ public class LPlayerMove : MonoBehaviour
     Animator anim;
 
     private void Start() {
-        Debug.Log("start");        
+        Debug.Log("start");
     }
 
     // Start is called before the first frame update
@@ -27,13 +28,18 @@ public class LPlayerMove : MonoBehaviour
     }
     void Update()
     {
+        //right = 1, left = -1 variable
+        if(spriteRenderer.flipX == false)
+            isRight = 1;
+        else
+            isRight = -1;
         //Jump
         if(Input.GetButtonDown("Jump") && !anim.GetBool("isJumping")){
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("isJumping",true);
         }
         if(Input.GetButtonDown("Jump") && anim.GetBool("isWallStick")){
-            rigid.AddForce(Vector2.left * counterJumpPower, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.left * isRight * counterJumpPower, ForceMode2D.Impulse);
             rigid.AddForce(Vector2.up* jumpPower, ForceMode2D.Impulse);
         }
 
@@ -43,20 +49,19 @@ public class LPlayerMove : MonoBehaviour
         //directon sprite
         if(Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1; // 왼쪽일때 flip x
-        
-        //Walking animation 
+
+        //Walking animation
         if(Mathf.Abs( rigid.velocity.x ) < 0.3)
             anim.SetBool("isWalking", false);
         else
             anim.SetBool("isWalking", true);
-        
+
         //wall sticking scan code
         if(true){
-            Debug.DrawRay(rigid.position, Vector3.right * Mathf.Abs(Input.GetAxisRaw("Horizontal")) , new Color(0,1,0));
-            RaycastHit2D rayHitright = Physics2D.Raycast(rigid.position, Vector3.right, 1, LayerMask.GetMask("Platform"));
-            RaycastHit2D rayHitleft = Physics2D.Raycast(rigid.position, Vector3.left, 1, LayerMask.GetMask("Platform"));
-            if(rayHitright.collider != null && rayHitright.distance < 0.5f || 
-                rayHitleft.collider != null && rayHitleft.distance < 0.5f ){
+            Debug.DrawRay(rigid.position, Vector3.right * isRight , new Color(0,1,0));
+            RaycastHit2D rayHitright = Physics2D.Raycast(rigid.position, Vector3.right * isRight, 1, LayerMask.GetMask("Platform"));
+            //RaycastHit2D rayHitleft = Physics2D.Raycast(rigid.position, Vector3.left, 1, LayerMask.GetMask("Platform"));
+            if(rayHitright.collider != null && rayHitright.distance < 0.5f ){
                 Debug.Log("wall sticking");
                 anim.SetBool("isWallStick", true);
             }
@@ -74,21 +79,9 @@ public class LPlayerMove : MonoBehaviour
             rigid.gravityScale = 1;
         }
 
-        //landing scanning code
-        if(true){
-            Debug.DrawRay(rigid.position, Vector3.down, new Color(0,1,0));
-            RaycastHit2D rayHitDown = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
-            if(rayHitDown.collider != null){
-                if(rayHitDown.distance < 0.5f){
-                    anim.SetBool("isJumping", false);
-                    //Debug.Log("grounded");
-                }
-                
-            }
-            //Debug.Log(rayHit.collider.name);
-        }
 
-        
+
+
 
 
     }
@@ -108,7 +101,23 @@ public class LPlayerMove : MonoBehaviour
         else if (rigid.velocity.x < maxSpeed * (-1)) // left max speed
             rigid.velocity = new Vector2(maxSpeed * (-1) ,rigid.velocity.y);
 
-        
+        //landing scanning code
+        if(anim.GetBool("isJumping")){
+            Debug.DrawRay(rigid.position, Vector3.down, new Color(0,1,0));
+            RaycastHit2D rayHitDown = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
+            if(rayHitDown.collider != null){
+                if(rayHitDown.distance < 0.5f || rigid.velocity.y < 0.001){
+
+                    anim.SetBool("isJumping", false);
+                    Debug.Log("grounded");
+                }
+
+            }
+            //Debug.Log(rayHit.collider.name);
+        }
+
+
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
