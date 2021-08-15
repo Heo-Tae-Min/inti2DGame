@@ -22,6 +22,7 @@ public class LBossMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animation>();
         Invoke("bossAI",2);
+        
     }
 
     // Update is called once per frame
@@ -38,7 +39,6 @@ public class LBossMove : MonoBehaviour
             spriteRenderer.flipX = false;
         
         
-
     }
     private void FixedUpdate() {
         rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
@@ -63,6 +63,22 @@ public class LBossMove : MonoBehaviour
         }
 
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.tag == "bullet"){
+            Debug.Log("im hit!!");
+            OnDamaged();
+        }
+        
+    }
+    public void OnDamaged(){
+        bossHealth -= 1;
+        Debug.Log(bossHealth);
+        if(bossHealth == 0){
+           Destroy(gameObject);
+        }
+        Invoke("Deactive", 0.3f);
+    }
     public void Turn(){
         nextMove *= -1;
         spriteRenderer.flipX = nextMove == 1;
@@ -70,6 +86,9 @@ public class LBossMove : MonoBehaviour
         Invoke("bossAI",0.5f);
     }
     
+    void DeActive(){
+        gameObject.SetActive(false);
+    }
     
     
 }

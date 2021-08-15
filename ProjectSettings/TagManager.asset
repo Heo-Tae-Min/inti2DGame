@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Item
   - Monster
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - PlayerDamaged
   - Monster
   - MonsterOnlyRoad
-  - 
+  - Bullet
   - 
   - 
   - 

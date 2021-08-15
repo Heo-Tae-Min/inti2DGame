@@ -56,8 +56,16 @@ public class Lbullet : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.tag == "Monster") {
             //attack
+            Debug.Log("bullet attack!!");
+            OnAttack(collision.transform);
             DestroyBullet();
+            
         }
         
+    }
+    void OnAttack(Transform enemy){
+        
+        LBossMove bossMove = enemy.GetComponent<LBossMove>();
+        bossMove.OnDamaged();
     }
 }

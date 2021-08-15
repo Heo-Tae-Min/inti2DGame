@@ -5,6 +5,7 @@ using UnityEngine;
 public class LPlayerMove : MonoBehaviour
 {
     // Start is called before the first frame update
+
     public float maxSpeed;
     public float counterJumpPower;
     public float jumpPower;
@@ -150,6 +151,10 @@ public class LPlayerMove : MonoBehaviour
 
             // Deactive Item
             collision.gameObject.SetActive(false);
+        }
+        else if(collision.gameObject.tag == "Finish")
+        {
+            //next Stage
         }
     }
 
