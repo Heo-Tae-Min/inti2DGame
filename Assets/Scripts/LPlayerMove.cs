@@ -9,6 +9,7 @@ public class LPlayerMove : MonoBehaviour
     public float counterJumpPower;
     public float jumpPower;
     public Transform frontCheck;
+    public GameObject pickUp;
 
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
@@ -130,6 +131,10 @@ public class LPlayerMove : MonoBehaviour
         if(collision.gameObject.tag == "Item")
         {
             // Point
+
+            // Animation
+            Instantiate(pickUp, transform.position, Quaternion.identity);
+            Destroy(collision.gameObject);
 
             // Deactive Item
             collision.gameObject.SetActive(false);
