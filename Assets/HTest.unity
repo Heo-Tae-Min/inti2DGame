@@ -257,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &29233014
 Transform:
   m_ObjectHideFlags: 0
@@ -400,7 +400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &173819751
 Transform:
   m_ObjectHideFlags: 0
@@ -523,7 +523,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0074863434, y: -0.1571877}
@@ -9619,7 +9619,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -9641,8 +9641,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 865644216}
   maxSpeed: 5
-  counterJumpPower: 6
-  jumpPower: 10
+  counterJumpPower: 5
+  jumpPower: 7
   isRight: 0
   frontCheck: {fileID: 0}
   pickUp: {fileID: 1761564626878718342, guid: 422b4c5c04b6c62468d1ecb3f1878b75, type: 3}
@@ -9715,7 +9715,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.378471, g: 0.5532208, b: 0.764151, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

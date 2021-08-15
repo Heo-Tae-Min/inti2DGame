@@ -167,6 +167,7 @@ public class LPlayerMove : MonoBehaviour
         else if(collision.gameObject.tag == "Finish")
         {
             //next Stage
+            gameManager.NextStage();
         }
     }
 
