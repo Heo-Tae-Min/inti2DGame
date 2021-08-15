@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LBossMove : MonoBehaviour
 {
+    public GameManager gameManager;
     public float bossHealth;
     // Start is called before the first frame update
     public Transform target;
@@ -95,6 +96,7 @@ public class LBossMove : MonoBehaviour
     
     void DeActive(){
         gameObject.SetActive(false);
+        gameManager.stagePoint += 1000;
     }
     
     
