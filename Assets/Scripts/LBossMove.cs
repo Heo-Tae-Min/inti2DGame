@@ -61,9 +61,7 @@ public class LBossMove : MonoBehaviour
             else
                 Invoke("bossAI", 1);
 
-            if(bossHealth == 0){
-                anim.SetBool("isDead",true);
-            }
+            
         }
 
     }
@@ -79,7 +77,9 @@ public class LBossMove : MonoBehaviour
         bossHealth -= 1;
         Debug.Log(bossHealth);
         if(bossHealth == 0){
-           Destroy(gameObject);
+           anim.SetBool("isDead",true);
+           CancelInvoke();
+           Invoke("DestroyObject",1);
         }
         Invoke("Deactive", 0.3f);
     }
@@ -88,6 +88,9 @@ public class LBossMove : MonoBehaviour
         spriteRenderer.flipX = nextMove == 1;
         CancelInvoke();
         Invoke("bossAI",0.5f);
+    }
+    public void DestroyObject(){
+        Destroy(gameObject);
     }
     
     void DeActive(){
