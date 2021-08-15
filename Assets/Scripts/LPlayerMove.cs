@@ -35,10 +35,6 @@ public class LPlayerMove : MonoBehaviour
         if(Input.GetButtonDown("Jump") && anim.GetBool("isWallStick")){
             rigid.AddForce(Vector2.left * counterJumpPower, ForceMode2D.Impulse);
             rigid.AddForce(Vector2.up* jumpPower, ForceMode2D.Impulse);
-            anim.SetBool("isWallJumping",true);
-        }
-        if(rigid.velocity.x == 0 && anim.GetBool("isWallJumping")){
-            anim.SetBool("isWallJumping",false);
         }
 
         //Stop speed
@@ -85,7 +81,6 @@ public class LPlayerMove : MonoBehaviour
             if(rayHitDown.collider != null){
                 if(rayHitDown.distance < 0.5f){
                     anim.SetBool("isJumping", false);
-                    anim.SetBool("isWallJumping",false);
                     //Debug.Log("grounded");
                 }
                 
@@ -127,6 +122,17 @@ public class LPlayerMove : MonoBehaviour
             }
             else // Damaged
                 OnDamaged(collision.transform.position);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Item")
+        {
+            // Point
+
+            // Deactive Item
+            collision.gameObject.SetActive(false);
         }
     }
 
