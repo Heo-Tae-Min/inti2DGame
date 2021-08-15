@@ -125,8 +125,13 @@ public class LPlayerMove : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
+            // Damaged
+            OnDamaged(collision.transform.position);
+        }
+        else if (collision.gameObject.tag == "Monster")
+        {
             // Jump Attack
-            if(rigid.velocity.y < 0 && transform.position.y > collision.transform.position.y)
+            if (rigid.velocity.y < 0 && transform.position.y > collision.transform.position.y)
             {
                 OnAttack(collision.transform);
             }
@@ -143,7 +148,6 @@ public class LPlayerMove : MonoBehaviour
 
             // Animation
             Instantiate(pickUp, transform.position, Quaternion.identity);
-            Destroy(collision.gameObject);
 
             // Deactive Item
             collision.gameObject.SetActive(false);
