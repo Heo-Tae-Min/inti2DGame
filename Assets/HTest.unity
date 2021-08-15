@@ -9229,7 +9229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409fa4ef381560446961268b270087c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossHealth: 2
+  bossHealth: 60
   target: {fileID: 0}
   direction: 0
   acceleration: 0
