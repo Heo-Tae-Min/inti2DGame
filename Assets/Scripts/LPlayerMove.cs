@@ -5,11 +5,7 @@ using UnityEngine;
 public class LPlayerMove : MonoBehaviour
 {
     // Start is called before the first frame update
-<<<<<<< HEAD
-
-=======
     public GameManager gameManager;
->>>>>>> abb5ea45b152f184656222f12823d718c0976a7b
     public float maxSpeed;
     public float counterJumpPower;
     public float jumpPower;
@@ -170,12 +166,7 @@ public class LPlayerMove : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Finish")
         {
-<<<<<<< HEAD
             //next Stage
-=======
-            // next stage
-            gameManager.NextStage();
->>>>>>> abb5ea45b152f184656222f12823d718c0976a7b
         }
     }
 
