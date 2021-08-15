@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         {  // Player Controll Lock
             Time.timeScale = 0;
             // Result UI
-            Debug.Log("°ÔÀÓ Å¬¸®¾î");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½");
             // Restart Button UI
             Text btnText = UIRestartBtn.GetComponentInChildren<Text>();
             btnText.text = "Clear!";
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             player.OnDie();
 
             // Result UI
-            Debug.Log("Á×¾ú½À´Ï´Ù!");
+            Debug.Log("ï¿½×¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
 
             // Retry Button UI
             UIRestartBtn.SetActive(true);
