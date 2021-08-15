@@ -5,6 +5,7 @@ using UnityEngine;
 public class LPlayerMove : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameManager gameManager;
     public float maxSpeed;
     public float counterJumpPower;
     public float jumpPower;
@@ -15,6 +16,7 @@ public class LPlayerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    CapsuleCollider2D capsuleCollider;
 
     private void Start() {
         Debug.Log("start");
@@ -26,6 +28,7 @@ public class LPlayerMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
     }
     void Update()
     {
@@ -144,6 +147,16 @@ public class LPlayerMove : MonoBehaviour
         if(collision.gameObject.tag == "Item")
         {
             // Point
+            bool isNormal = collision.gameObject.name.Contains("Normal");
+            bool isPlus = collision.gameObject.name.Contains("Plus");
+            bool isUltra = collision.gameObject.name.Contains("Ultra");
+
+            if (isNormal)
+                gameManager.stagePoint += 50;
+            else if (isPlus)
+                gameManager.stagePoint += 150;
+            else if (isUltra)
+                gameManager.stagePoint += 500;
 
             // Animation
             Instantiate(pickUp, transform.position, Quaternion.identity);
@@ -151,11 +164,17 @@ public class LPlayerMove : MonoBehaviour
             // Deactive Item
             collision.gameObject.SetActive(false);
         }
+        else if(collision.gameObject.tag == "Finish")
+        {
+            // next stage
+            gameManager.NextStage();
+        }
     }
 
     void OnAttack(Transform enemy)
     {
         // Point
+        gameManager.stagePoint += 100;
 
         // Reaction Jump
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
@@ -167,6 +186,9 @@ public class LPlayerMove : MonoBehaviour
 
     void OnDamaged(Vector2 targetPos)
     {
+        // Health Down
+        gameManager.HealthDown();
+
         // Change Layer (Immortal Active)
         gameObject.layer = 9;
 
@@ -187,5 +209,28 @@ public class LPlayerMove : MonoBehaviour
     {
         gameObject.layer = 8;
         spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
+
+    public void OnDie()
+    {
+        // Sprite Alpha
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+
+        // Sprite Flip Y
+        spriteRenderer.flipY = true;
+
+        // Collider Disable
+        capsuleCollider.enabled = false;
+
+        // Die Effect Jump
+        rigid.AddForce(Vector2.up, ForceMode2D.Impulse);
+
+        // Destroy
+        Invoke("DeActive", 5);
+    }
+
+    public void VelocityZero()
+    {
+        rigid.velocity = Vector2.zero;
     }
 }
