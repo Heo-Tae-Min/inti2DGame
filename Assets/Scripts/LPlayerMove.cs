@@ -36,8 +36,13 @@ public class LPlayerMove : MonoBehaviour
             isRight = -1;
         //Jump
         if(Input.GetButtonDown("Jump") && !anim.GetBool("isJumping")){
-            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            anim.SetBool("isJumping",true);
+            if (!anim.GetBool("isWallStick"))
+            {
+                rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                anim.SetBool("isJumping", true);
+            }
+            else
+                anim.SetBool("isJumping", true);
         }
         if(Input.GetButtonDown("Jump") && anim.GetBool("isWallStick")){
             rigid.AddForce(Vector2.left * isRight * counterJumpPower, ForceMode2D.Impulse);
