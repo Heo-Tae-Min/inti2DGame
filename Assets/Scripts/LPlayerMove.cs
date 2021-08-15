@@ -119,8 +119,26 @@ public class LPlayerMove : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            OnDamaged(collision.transform.position);
+            // Jump Attack
+            if(rigid.velocity.y < 0 && transform.position.y > collision.transform.position.y)
+            {
+                OnAttack(collision.transform);
+            }
+            else // Damaged
+                OnDamaged(collision.transform.position);
         }
+    }
+
+    void OnAttack(Transform enemy)
+    {
+        // Point
+
+        // Reaction Jump
+        rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+
+        // Enemy Die
+        HEnemyMove enemyMove = enemy.GetComponent<HEnemyMove>();
+        enemyMove.OnDamaged();
     }
 
     void OnDamaged(Vector2 targetPos)
