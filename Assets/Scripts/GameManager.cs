@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         else
         {
             // All Health OFF
-            UIHealth[0].color = new Color(1, 0, 0, 0.4f);
+            UIHealth[0].color = new Color(1, 1, 1, 0.4f);
 
             // Player Die Effect
             player.OnDie();
@@ -96,6 +96,6 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
