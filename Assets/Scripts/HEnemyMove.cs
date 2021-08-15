@@ -30,7 +30,8 @@ public class HEnemyMove : MonoBehaviour
         // Platform check
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.3f, rigid.position.y);
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
-        if(rayHit.collider == null)
+        RaycastHit2D rayHit2 = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("MonsterOnlyRoad"));
+        if (rayHit.collider == null && rayHit2.collider == null)
         {
             Turn();
         }
