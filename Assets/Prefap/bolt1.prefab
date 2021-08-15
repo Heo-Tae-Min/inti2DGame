@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 550741875251858810}
   - component: {fileID: -7240199363168431265}
   - component: {fileID: 2973092230224648472}
+  - component: {fileID: 133115752564403464}
   m_Layer: 0
   m_Name: bolt1
   m_TagString: Untagged
@@ -96,13 +97,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f859347f5410c4f4fbce1fd31284d3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 8
   spark: {fileID: 1761564626878718342, guid: 422b4c5c04b6c62468d1ecb3f1878b75, type: 3}
   h: 0
   distance: 0.5
   isLayer:
     serializedVersion: 2
     m_Bits: 192
+  rigid: {fileID: 0}
 --- !u!95 &2973092230224648472
 Animator:
   serializedVersion: 3
@@ -122,3 +124,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &133115752564403464
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8100631639881656861}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1

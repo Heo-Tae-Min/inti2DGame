@@ -79,12 +79,6 @@ public class LPlayerMove : MonoBehaviour
         else{
             rigid.gravityScale = 1;
         }
-
-
-
-
-
-
     }
 
     // Update is called once per frame

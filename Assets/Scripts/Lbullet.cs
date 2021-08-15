@@ -12,7 +12,7 @@ public class Lbullet : MonoBehaviour
     public float h;
     public float distance;
     public LayerMask isLayer;
-    
+    public Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     void Start()
     {   
@@ -20,6 +20,12 @@ public class Lbullet : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         //spriteRenderer.flipX = h == 1;
         Invoke("DestroyBullet",1.5f);
+        if(transform.rotation.y != 0)
+        {
+            Vector3 temp = transform.position;
+            temp.x -= 1.5f;
+            transform.position = temp;
+        }
     }
 
     // Update is called once per frame
@@ -36,6 +42,7 @@ public class Lbullet : MonoBehaviour
             transform.Translate(transform.right * speed * Time.deltaTime);
         }
         else{
+            
             transform.Translate(transform.right * speed * -1 * Time.deltaTime);
         }
 
@@ -48,7 +55,8 @@ public class Lbullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.tag == "Monster") {
-            
+            //attack
+            DestroyBullet();
         }
         
     }
