@@ -12,7 +12,7 @@ public class LBossMove : MonoBehaviour
     public float velocity;
     SpriteRenderer spriteRenderer; 
     Rigidbody2D rigid;
-    Animation anim;
+    Animator anim;
     public int nextMove;
     public int nextJump;
     public int jumpPower;
@@ -20,7 +20,7 @@ public class LBossMove : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animation>();
+        anim = GetComponent<Animator>();
         Invoke("bossAI",2);
         
     }
@@ -60,6 +60,10 @@ public class LBossMove : MonoBehaviour
             }
             else
                 Invoke("bossAI", 1);
+
+            if(bossHealth == 0){
+                anim.SetBool("isDead",true);
+            }
         }
 
     }
