@@ -64,8 +64,9 @@ public class LPlayerMove : MonoBehaviour
                 Debug.Log("wall sticking");
                 anim.SetBool("isWallStick", true);
             }
-            else
+            else{
                 anim.SetBool("isWallStick",false);
+            }
         }
 
 
